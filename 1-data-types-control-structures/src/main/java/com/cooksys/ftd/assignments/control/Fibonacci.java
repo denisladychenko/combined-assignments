@@ -62,6 +62,7 @@ public class Fibonacci {
     	//if start or end value is negative or start is greater than the end throw an exception
     	if(start < 0 || end < 0 || end < start)
         throw new IllegalArgumentException();
+    	
     	//create and array to hold the values for the given slice of the pattern
     	int[] arr = new int[end - start];
     	//load an array
@@ -83,6 +84,7 @@ public class Fibonacci {
     	//if count is negative throw an exception
     	if(count < 0)
         throw new IllegalArgumentException();
+    	
     	//create the array to hold values for the given slice of the pattern
     	int[] arr = new int[count];
     	//load an array
