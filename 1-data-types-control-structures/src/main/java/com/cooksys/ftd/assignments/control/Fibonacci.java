@@ -24,7 +24,28 @@ public class Fibonacci {
      * @throws IllegalArgumentException if the given index is less than zero
      */
     public static int atIndex(int i) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	//throw an exception if argument is negative
+    	if(i < 0)
+        throw new IllegalArgumentException();
+    	//create an array with the size one greater than the index passed
+    	int[] arr = new int[i + 1];
+    	//iterate through the array and load values
+    	for(int index = 0; index < arr.length;index++)
+    	{
+    		//if index is 0 or 1 assign 1 to the element
+    		if(index == 0 || index == 1)
+    		{
+    			arr[index] = 1;
+    		}
+    		//if index is anything other than 0 or 1 assign the sum of two previous indices
+    		else
+    		{
+    			arr[index] = arr[index - 1] + arr[index - 2];
+    		}
+    		
+    	}
+    	return arr[i];
+    	
     }
 
     /**
@@ -38,7 +59,17 @@ public class Fibonacci {
      *                                  given end is less than the given start
      */
     public static int[] slice(int start, int end) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	//if start or end value is negative or start is greater than the end throw an exception
+    	if(start < 0 || end < 0 || end < start)
+        throw new IllegalArgumentException();
+    	//create and array to hold the values for the given slice of the pattern
+    	int[] arr = new int[end - start];
+    	//load an array
+    	for(int i = 0; i < arr.length; i++)
+    	{
+    		arr[i] = atIndex(start++);
+    	}
+    	return arr;
     }
 
     /**
@@ -49,6 +80,16 @@ public class Fibonacci {
      * @throws IllegalArgumentException if the given count is negative
      */
     public static int[] fibonacci(int count) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	//if count is negative throw an exception
+    	if(count < 0)
+        throw new IllegalArgumentException();
+    	//create the array to hold values for the given slice of the pattern
+    	int[] arr = new int[count];
+    	//load an array
+    	for(int i = 0; i < arr.length; i++)
+    	{
+    		arr[i] = atIndex(i);
+    	}
+    	return arr;
     }
 }

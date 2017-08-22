@@ -1,5 +1,7 @@
 package com.cooksys.ftd.assignments.control;
 
+
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -26,7 +28,14 @@ public class FizzBuzz {
      * @throws IllegalArgumentException if b is zero
      */
     public static boolean divides(int a, int b) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	//if divided by 0 throw exception
+    	if(b == 0)
+    		throw new IllegalArgumentException();
+    	//return true if divisible by 0
+        if(a % b == 0)
+        	return true;
+        else
+        	return false;
     }
 
     /**
@@ -41,7 +50,16 @@ public class FizzBuzz {
      * @return a message according to the format above, or null if n is not divisible by either 3 or 5
      */
     public static String message(int n) {
-        throw new NotImplementedException();
+        // determine what message to print
+        if(divides(n, 15))
+        	return n + ": FizzBuzz";
+        else if(divides(n, 5))
+        	return n + ": Buzz";
+        else if(divides(n, 3))
+        	return n + ": Fizz";
+        else
+        	return null;
+        
     }
 
     /**
@@ -55,15 +73,52 @@ public class FizzBuzz {
      * @throws IllegalArgumentException if the given end is less than the given start
      */
     public static String[] messages(int start, int end) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	//throw exception if end value is less than start value
+    	if(end < start)
+    		throw new IllegalArgumentException();
+    	//an array of messages
+        String[] mess = new String[end - start];
+        //load an array 
+        for(int i = 0; i < mess.length; i++)
+        {
+        		mess[i] = message(start++);
+        }
+        int counter = 0;      //counts how many element are not null elements
+        for(int i = 0; i < mess.length; i++)
+        {
+        	//if element is not null then count it
+        	if(mess[i] != null)
+        	{
+        		counter++;
+        	}
+        }
+        //create an array big enough to hold all non-null messages
+        String[] finalMess =  new String[counter];
+        int y = 0;                               //counter for the finalMess array
+        for(int i = 0; i < mess.length; i++)
+        {
+        	//if element is not null load it into the finalMess array
+        	if(mess[i] != null)
+        	{
+        		finalMess[y++] = mess[i];
+        	}
+        }
+        //return final array
+        return  finalMess;
     }
-
+    
     /**
      * For this main method, iterate over the numbers 1 through 115 and print
      * the relevant messages to sysout
      */
     public static void main(String[] args) {
-        throw new NotImplementedException();
+    	//create the array of messages excluding null element
+    	String[] mess = messages(1, 115);
+    	//iterate through the array and display the values
+        for(int i = 0; i < mess.length; i++)
+        {
+        	System.out.println(mess[i]);
+        }
     }
 
 }
