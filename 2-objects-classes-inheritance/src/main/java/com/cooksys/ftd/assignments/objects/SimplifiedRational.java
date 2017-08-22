@@ -3,6 +3,9 @@ package com.cooksys.ftd.assignments.objects;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class SimplifiedRational implements IRational {
+	
+	private int numerator;
+	private int denominator;
     /**
      * Determines the greatest common denominator for the given values
      *
@@ -12,7 +15,18 @@ public class SimplifiedRational implements IRational {
      * @throws IllegalArgumentException if a <= 0 or b < 0
      */
     public static int gcd(int a, int b) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	if(a < 0 || b < 0)
+        throw new IllegalArgumentException();
+    	
+    	int gcd = 0;
+    	for(int i = 1; i <=((a < b) ? a : b); i++)
+    	{
+    		if(a % i == 0 && b % i == 0)
+    		{
+    			gcd = i;
+    		}
+    	}
+    	return gcd;
     }
 
     /**
@@ -24,12 +38,19 @@ public class SimplifiedRational implements IRational {
      * `simplify(0, 10) = [0, 1]`
      *
      * @param numerator   the numerator of the rational value to simplify
-     * @param denominator the denominator of the rational value to simplify
+     * @param denominator the denominat or of the rational value to simplify
      * @return a two element array representation of the simplified numerator and denominator
      * @throws IllegalArgumentException if the given denominator is 0
      */
     public static int[] simplify(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	if(denominator == 0)
+        throw new IllegalArgumentException();
+    	int[] arr = new int[2];
+    	arr[1] = numerator / gcd(numerator, denominator);
+    	arr[2] = denominator / gcd(numerator, denominator);
+    	 
+    	return arr;
+    	
     }
 
     /**
@@ -45,7 +66,12 @@ public class SimplifiedRational implements IRational {
      * @throws IllegalArgumentException if the given denominator is 0
      */
     public SimplifiedRational(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	if(denominator == 0)
+        throw new IllegalArgumentException();
+    	
+    	int[] arr = simplify(numerator, denominator);
+    	this.numerator = arr[0];
+    	this.denominator = arr[1];
     }
 
     /**
@@ -53,7 +79,7 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public int getNumerator() {
-        throw new NotImplementedException();
+        return numerator;
     }
 
     /**
@@ -61,7 +87,7 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public int getDenominator() {
-        throw new NotImplementedException();
+       return denominator;
     }
 
     /**
