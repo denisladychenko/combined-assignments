@@ -18,7 +18,7 @@ public class Rational implements IRational {
      * @throws IllegalArgumentException if the given denominator is 0
      */
     public Rational(int numerator, int denominator) throws IllegalArgumentException {
-    	if(denominator > 0)
+    	if(denominator == 0)
         	throw new IllegalArgumentException();
         
         this.numerator = numerator;
@@ -56,8 +56,9 @@ public class Rational implements IRational {
      */
     @Override
     public Rational construct(int numerator, int denominator) throws IllegalArgumentException {
-    	if(denominator < 0)
-        throw new IllegalArgumentException();
+    	if(denominator == 0){
+    		throw new IllegalArgumentException();
+    	}
     	
     	Rational rat = new Rational(numerator, denominator);
     	return rat;
@@ -95,8 +96,8 @@ public class Rational implements IRational {
     public String toString() {
     	
         if((this.numerator < 0 && this.denominator > 0) || (this.numerator >= 0 && this.denominator < 0))
-        	return "-" + this.numerator + "/" + this.denominator;
+        	return "-" + Math.abs(this.numerator) + "/" + Math.abs(this.denominator);
         else
-        	return this.numerator + "/" + this.denominator;
+        	return Math.abs(this.numerator) + "/" + Math.abs(this.denominator);
     }
 }

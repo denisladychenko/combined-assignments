@@ -33,14 +33,7 @@ interface IRational {
 	 * @throws IllegalArgumentException
 	 *             if the given denominator is 0
 	 */
-	default IRational construct(int numerator, int denominator) throws IllegalArgumentException{
-	
-	if(denominator < 0)
-		throw new IllegalArgumentException();
-	
-		Rational rat = new Rational(numerator, denominator);
-		return rat;
-	}
+	IRational construct(int numerator, int denominator) throws IllegalArgumentException;
 
 	/**
 	 * negation of rational values
@@ -65,11 +58,11 @@ interface IRational {
 	 *             if the numerator of this rational value is 0
 	 */
 	default IRational invert() throws IllegalStateException {
-		if(this.getNumerator() < 0)
-		throw new IllegalArgumentException();
+		if(getNumerator() == 0){
+			throw new IllegalStateException();
+		}
 		
-		int temp = this.getDenominator();
-		return construct(temp, getNumerator());
+		return construct(getDenominator(), getNumerator());
 		
 		
 		

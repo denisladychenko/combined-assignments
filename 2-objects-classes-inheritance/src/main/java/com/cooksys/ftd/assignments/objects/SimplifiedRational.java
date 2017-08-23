@@ -15,18 +15,18 @@ public class SimplifiedRational implements IRational {
      * @throws IllegalArgumentException if a <= 0 or b < 0
      */
     public static int gcd(int a, int b) throws IllegalArgumentException {
-    	if(a < 0 || b < 0)
+    	if(a <= 0 || b < 0)
         throw new IllegalArgumentException();
     	
-    	int gcd = 0;
-    	for(int i = 1; i <=((a < b) ? a : b); i++)
+    	int temp;
+    	
+    	while(b > 0)
     	{
-    		if(a % i == 0 && b % i == 0)
-    		{
-    			gcd = i;
-    		}
+    		temp = b;
+    		b = a % b;
+    		a = temp;
     	}
-    	return gcd;
+    	return a;
     }
 
     /**
@@ -38,7 +38,7 @@ public class SimplifiedRational implements IRational {
      * `simplify(0, 10) = [0, 1]`
      *
      * @param numerator   the numerator of the rational value to simplify
-     * @param denominator the denominat or of the rational value to simplify
+     * @param denominator the denominator or of the rational value to simplify
      * @return a two element array representation of the simplified numerator and denominator
      * @throws IllegalArgumentException if the given denominator is 0
      */
@@ -46,8 +46,9 @@ public class SimplifiedRational implements IRational {
     	if(denominator == 0)
         throw new IllegalArgumentException();
     	int[] arr = new int[2];
-    	arr[1] = numerator / gcd(numerator, denominator);
-    	arr[2] = denominator / gcd(numerator, denominator);
+    	int gcd = gcd(Math.abs(numerator), Math.abs(denominator));
+    	arr[0] = numerator / gcd;
+    	arr[1] = denominator / gcd;
     	 
     	return arr;
     	
@@ -68,10 +69,15 @@ public class SimplifiedRational implements IRational {
     public SimplifiedRational(int numerator, int denominator) throws IllegalArgumentException {
     	if(denominator == 0)
         throw new IllegalArgumentException();
-    	
+    	if(numerator == 0){
+    		this.numerator = numerator;
+    		this.denominator = denominator;
+    	}
+    	else{
     	int[] arr = simplify(numerator, denominator);
     	this.numerator = arr[0];
     	this.denominator = arr[1];
+    	}
     }
 
     /**
@@ -103,7 +109,10 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public SimplifiedRational construct(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	if(denominator == 0)
+        throw new IllegalArgumentException();
+    	
+    	return new SimplifiedRational(numerator, denominator);
     }
 
     /**
@@ -114,7 +123,15 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public boolean equals(Object obj) {
-        throw new NotImplementedException();
+        if(obj instanceof SimplifiedRational)
+        {
+        	SimplifiedRational rat = (SimplifiedRational)obj;
+        	if(this.numerator == rat.getNumerator() && this.denominator == rat.getDenominator())
+        	{
+        		return true;
+        	}
+        }
+        return false;
     }
 
     /**
@@ -126,6 +143,9 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public String toString() {
-        throw new NotImplementedException();
+    	if((this.numerator < 0 && this.denominator > 0) || (this.numerator >= 0 && this.denominator < 0))
+        	return "-" + Math.abs(this.numerator) + "/" + Math.abs(this.denominator);
+        else
+        	return Math.abs(this.numerator) + "/" + Math.abs(this.denominator);
     }
 }
