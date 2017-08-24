@@ -1,15 +1,20 @@
 package com.cooksys.ftd.assignments.collections.hierarchy;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import com.cooksys.ftd.assignments.collections.model.Capitalist;
 
 /**
  * @param <Element> generic element type
  * @param <Parent> parent element type
  */
 public interface Hierarchy<Element extends Hierarchical<Element, Parent>, Parent extends Element> {
-
+	
+	
+	
     /**
      * Adds a given element to the hierarchy.
      * <p>
@@ -29,7 +34,8 @@ public interface Hierarchy<Element extends Hierarchical<Element, Parent>, Parent
      * @return true if the element was added successfully, false otherwise
      */
     boolean add(Element element);
-
+    
+    
     /**
      * @param element the element to search for
      * @return true if the element has been added to the hierarchy, false otherwise
