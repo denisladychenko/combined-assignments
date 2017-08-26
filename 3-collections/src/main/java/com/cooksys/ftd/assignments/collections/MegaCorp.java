@@ -14,7 +14,8 @@ import java.util.Map.Entry;
 public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	
 	
-	HashMap<FatCat, Set<Capitalist>> map = new HashMap<>();
+	
+	private HashMap<FatCat, Set<Capitalist>> map = new HashMap<>();
 
     /**
      * Adds a given element to the hierarchy.
@@ -183,17 +184,33 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public List<FatCat> getParentChain(Capitalist capitalist) {
+    	
+    	
+    	if(capitalist == null)
+    		return new LinkedList<>();
+    	if(map == null)
+    		return new LinkedList<>();
+    		
+    	
     	List<FatCat> list = new LinkedList<>();
     	int index = 0;
+    	
+    	
+      FatCat cap = new FatCat((FatCat) capitalist);
+     
+     
+  	
     	 for(Entry<FatCat, Set<Capitalist>> m:map.entrySet())
      	{
+    		 System.out.println("sdfdf");
          	 Iterator<Capitalist> iterator = m.getValue().iterator();
          	 while(iterator.hasNext())
          	 {
-         		 if(iterator.next().equals(capitalist))
+         		 
+         		 if(iterator.next().equals(cap))
          		 {
          			 list.add(index++, m.getKey());
-         			 getParentChain(m.getKey());
+         			 cap = m.getKey();
          		 }
          	 }
          	 

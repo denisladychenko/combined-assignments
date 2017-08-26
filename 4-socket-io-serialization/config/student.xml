@@ -1,1 +1,7 @@
-<student/>
+<student firstName="Denchik" lastName="Lobanobich">
+
+<favorite-ide>12345</favorite-ide>
+<favorite-language>chinese</favorite-language>
+<favorite-paradigm>OOP</favorite-paradigm>
+
+</student>
